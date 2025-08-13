@@ -1,10 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Portfolio</title>
+  <meta charset="UTF-8" />
+  <title>Jayant Sanjay Modak — Data Science & ML Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ATS-friendly Data Science portfolio showcasing ML, AI, Generative AI, analytics projects, and skills." />
+  <meta name="keywords" content="Data Science, Machine Learning, AI, Artificial Intelligence, Generative AI, LLM, Python, Pandas, NumPy, scikit-learn, SQL, Flask, EDA, Statistics, Regression, Classification, Model Deployment, Data Visualization, Power BI, PostgreSQL, MySQL, APIs, Bootstrap" />
+
+  <style>
+    :root{
+      --bg: #0a0d14;
+      --bg-secondary: #0f1419;
+      --panel: #151b26;
+      --panel-hover: #1a2030;
+      --ink: #e8edff;
+      --muted: #a9b3c9;
+      --accent: #7c3aed;
+      --accent2:#22d3ee;
+      --accent-glow: #6366f1;
+      --chip:#1e2844;
+      --chip-hover:#2a3654;
+      --ring: rgba(124,58,237,.35);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --projects-bg: linear-gradient(135deg, rgba(124,58,237,.08), rgba(34,211,238,.06));
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;padding:0;background:var(--bg);color:var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 20% 80%, rgba(124,58,237,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(34,211,238,0.15) 0%, transparent 50%),
+        var(--bg);
+    }
+
+    a{color:var(--accent2);text-decoration:none;transition:all 0.3s ease}
+    a:hover{text-decoration:underline;transform:translateY(-1px)}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    .hero{
+      padding:80px 0 48px;
+      background:
+        radial-gradient(1200px 800px at 10% -10%, rgba(124,58,237,.25), transparent),
+        radial-gradient(1000px 600px at 90% 0%, rgba(34,211,238,.20), transparent);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.03) 2px,
+          rgba(255,255,255,0.03) 4px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.03) 2px,
+          rgba(255,255,255,0.03) 4px
+        );
+      pointer-events: none;
+    }
+
+    .row{display:flex;flex-wrap:wrap;gap:32px;align-items:center}
+    .col{flex:1 1 300px}
+
+    .btn{
+      display:inline-block;padding:14px 24px;border-radius:16px;border:1px solid rgba(255,255,255,.15);
+      color:var(--ink);background:rgba(255,255,255,.05);cursor:pointer;
+      transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight:500;position:relative;overflow:hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      border:none;color:#0b0f17;font-weight:700;
+      box-shadow: 0 8px 25px rgba(124,58,237,.3);
+    }
+
+    .btn.primary:hover{
+      transform:translateY(-2px);
+      box-shadow: 0 12px 35px rgba(124,58,237,.4);
+    }
+
+    .btn.ghost:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
+
+    .chip{
+      display:inline-block;background:var(--chip);border:1px solid var(--ring);
+      color:#cbd5ff;padding:8px 14px;border-radius:999px;font-size:.85rem;
+      margin:.3rem .4rem .3rem 0;transition:all 0.3s ease;cursor:pointer;
+    }
+
+    .chip:hover{background:var(--chip-hover);transform:translateY(-1px)}
+
+    .panel{
+      background:var(--panel);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;padding:32px;
+      box-shadow:0 20px 40px rgba(0,0,0,.3), 0 0 0 1px rgba(255,255,255,.05);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-2px);
+      box-shadow:0 25px 50px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    .section{padding:40px 0}
+
+    .divider{
+      height:2px;
+      background:linear-gradient(90deg,transparent,rgba(124,58,237,.4),rgba(34,211,238,.4),transparent);
+      margin:40px 0;border-radius:2px;
+    }
+
+    .title{
+      font-size:2.2rem;font-weight:900;letter-spacing:-.5px;
+      background:linear-gradient(135deg,#fff,var(--accent2),var(--accent));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      margin:0 0 20px;text-align:center;
+    }
+
+    .lead{font-size:1.25rem;color:#dfe6ff;margin:16px 0 0;line-height:1.6}
+    .muted{color:var(--muted)}
+
+    .avatar{
+      width:160px;height:160px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg, rgba(124,58,237,.4), rgba(34,211,238,.4));
+      border:3px solid rgba(255,255,255,.2);overflow:hidden;
+      box-shadow: 0 20px 40px rgba(124,58,237,.2);
+      transition: all 0.3s ease;
+    }
+
+    .avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 25px 50px rgba(124,58,237,.3);
+    }
+
+    /* Enhanced Projects Section */
+    #projects {
+      background: var(--projects-bg);
+      border-radius: 32px;
+      padding: 60px 40px;
+      margin: 40px 0;
+      border: 2px solid rgba(124,58,237,.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #projects::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(circle at 30% 70%, rgba(124,58,237,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 30%, rgba(34,211,238,0.08) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: rotate(0deg) translate(0, 0); }
+      33% { transform: rotate(120deg) translate(10px, -10px); }
+      66% { transform: rotate(240deg) translate(-10px, 10px); }
+    }
+
+    #projects .title {
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, #fff 0%, var(--accent2) 50%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    #projects .title::after {
+      content: '🚀';
+      margin-left: 16px;
+      font-size: 2rem;
+    }
+
+    .grid{display:grid;gap:28px;position:relative;z-index:1}
+    @media(min-width:900px){
+      .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+      .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    }
+
+    .card{
+      background:var(--panel);border:2px solid rgba(124,58,237,.15);
+      border-radius:20px;padding:28px;height:100%;display:flex;flex-direction:column;
+      transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position:relative;overflow:hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card:hover{
+      transform:translateY(-8px) scale(1.02);
+      border-color:rgba(124,58,237,.3);
+      box-shadow: 0 25px 50px rgba(124,58,237,.2), 0 0 0 1px rgba(255,255,255,.1);
+      background: var(--panel-hover);
+    }
+
+    .card h3{
+      margin:.5rem 0 .8rem;font-size:1.3rem;font-weight:700;
+      background:linear-gradient(135deg,#fff,var(--accent2));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+
+    .bullets{padding-left:1.2rem;margin:.5rem 0 0}
+    .bullets li{margin:.4rem 0;line-height:1.5}
+
+    .nav{display:flex;flex-wrap:wrap;gap:12px}
+
+    footer{padding:40px 0 60px}
+
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+    /* Enhanced Skills Section */
+    #skills .panel {
+      background: linear-gradient(135deg, var(--panel), rgba(124,58,237,.05));
+    }
+
+    #skills .chip {
+      background: linear-gradient(135deg, var(--chip), rgba(124,58,237,.1));
+      border-color: rgba(124,58,237,.3);
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .row{flex-direction:column;align-items:center;text-align:center}
+      .col{max-width:100%}
+      .avatar{margin-top:30px;width:140px;height:140px}
+      .title{font-size:1.8rem}
+      #projects .title{font-size:2.2rem}
+      #projects{padding:40px 20px;margin:20px 0}
+      .container{padding:0 16px}
+    }
+
+    /* Smooth entrance animations */
+    .card, .panel {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+
+    /* Project links enhancement */
+    .card a[href*="pythonanywhere"] {
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .card a[href*="pythonanywhere"]:hover {
+      color: var(--accent2);
+    }
+
+    /* Enhanced contact section */
+    #contact .panel {
+      background: linear-gradient(135deg, var(--panel), rgba(34,211,238,.05));
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-<h1>My first Portfolio</h1>
+
+<header class="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col" style="min-width:300px;max-width:680px">
+        <div class="chip">👋 Hello! I'm</div>
+        <h1 style="font-size:2.8rem;margin:.4rem 0 0;font-weight:900">Jayant Sanjay Modak</h1>
+        <p class="lead">
+          Data Science • Machine Learning • Generative AI — I build predictive models, AI-powered applications, and end-to-end analytics solutions using <strong>Python</strong>, <strong>SQL</strong>, <strong>scikit-learn</strong>, and <strong>Flask</strong>.
+        </p>
+        <div style="margin-top:20px" class="nav">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn ghost" href="#skills">Skills</a>
+          <a class="btn ghost" href="#contact">Contact</a>
+        </div>
+        <div style="margin-top:20px">
+          <a class="chip" href="mailto:jayantmodak10@gmail.com">📧 jayantmodak10@gmail.com</a>
+          <a class="chip" href="https://linkedin.com/in/jayant-modak-30440b215" target="_blank" rel="noopener">🔗 LinkedIn</a>
+          <a class="chip" href="https://github.com/JayantM1" target="_blank" rel="noopener">💻 GitHub</a>
+          <span class="chip">📞 7057367616</span>
+          <span class="chip">📍 Pune, India</span>
+        </div>
+      </div>
+      <div class="col" style="min-width:440px;display:flex;justify-content:flex-end">
+        <div class="avatar" id="photo" aria-label="Profile photo">
+          <img src="profile.jpg" alt="Profile photo of Jayant Sanjay Modak" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section id="summary" class="section">
+    <h2 class="title">Professional Summary</h2>
+    <div class="panel">
+      <p>
+        Skilled in <strong>Data Science</strong>, <strong>Machine Learning</strong>, <strong>Artificial Intelligence</strong>, and <strong>Generative AI</strong>, with hands-on work in regression, classification, EDA, statistics, model deployment, and data storytelling. I enjoy converting data into actionable insights and deploying models with Flask and Python.
+      </p>
+      <p class="sr-only">
+        Keywords: LLM, Prompt Engineering, Feature Engineering, Cross-validation, Hyperparameter Tuning, ROC-AUC,
+        Confusion Matrix, Linear Regression, Logistic Regression, Random Forest, XGBoost, SVM, KNN, Clustering,
+        K-Means, PCA, Data Cleaning, ETL, SQL Joins, Window Functions, REST APIs, CI/CD, Docker, Power BI Dashboards.
+      </p>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <h2 class="title">Featured Projects</h2>
+    <div class="grid cols-3">
+      <article class="card">
+        <h3>House Price Predictor Tool</h3>
+        <p class="muted">Regression model for real-time price predictions from features like size, bedrooms, and age of house.</p>
+        <ul class="bullets">
+          <li>Built with Python, scikit-learn, Flask, HTML/CSS.</li>
+          <li>Responsive UI: deployed for live inference on PythonAnywhere.</li>
+        </ul>
+        <div style="margin-top:12px">
+          <span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">Flask</span><span class="chip">Bootstrap</span>
+        </div>
+        <p style="margin-top:auto;margin-top:16px"><a href="https://jayantm10.pythonanywhere.com/" target="_blank" rel="noopener">Open App ↗</a></p>
+      </article>
+
+      <article class="card">
+        <h3>Diabetes Predictor Tool</h3>
+        <p class="muted">Classifier to estimate diabetes risk from inputs such as glucose, BMI, and age with a simple web UI.</p>
+        <ul class="bullets">
+          <li>ML classification using scikit-learn and Flask.</li>
+          <li>Deployed interface with HTML/CSS and Bootstrap.</li>
+        </ul>
+        <div style="margin-top:12px">
+          <span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">Flask</span><span class="chip">Bootstrap</span>
+        </div>
+        <p style="margin-top:auto;margin-top:16px"><a href="https://jayantmodak10.pythonanywhere.com/" target="_blank" rel="noopener">Open App ↗</a></p>
+      </article>
+
+      <article class="card">
+        <h3>FitLife Generator — Generative AI Fitness Planner</h3>
+        <p class="muted">Flask app using Google Generative AI (Gemini) to create personalized 7-day workout & meal plans.</p>
+        <ul class="bullets">
+          <li>Collects user goals, frequency, duration, dietary preferences.</li>
+          <li>Generates structured plans via Generative AI; responsive UI.</li>
+        </ul>
+        <div style="margin-top:12px">
+          <span class="chip">Generative AI</span><span class="chip">Gemini</span><span class="chip">Flask</span><span class="chip">PythonAnywhere</span>
+        </div>
+        <p style="margin-top:auto;margin-top:16px"><a href="https://jayant10modak.pythonanywhere.com/" target="_blank" rel="noopener">Open App ↗</a></p>
+      </article>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="skills" class="section">
+    <h2 class="title">Technical Skills</h2>
+    <div class="panel">
+      <div class="grid cols-2">
+        <div>
+          <h3 class="muted">Languages & Frameworks</h3>
+          <div>
+            <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span>
+            <span class="chip">Matplotlib</span><span class="chip">Seaborn</span><span class="chip">SQL</span>
+            <span class="chip">Flask</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Bootstrap</span>
+          </div>
+        </div>
+        <div>
+          <h3 class="muted">Databases</h3>
+          <div><span class="chip">MySQL</span><span class="chip">PostgreSQL</span></div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <h3 class="muted">ML, AI & Analytics</h3>
+        <div>
+          <span class="chip">Machine Learning</span><span class="chip">Artificial Intelligence</span>
+          <span class="chip">Generative AI</span><span class="chip">scikit-learn</span><span class="chip">Statistics</span>
+          <span class="chip">Mathematics</span><span class="chip">Regression</span><span class="chip">Classification</span>
+          <span class="chip">EDA</span><span class="chip">Data Storytelling</span><span class="chip">Model Deployment</span><span class="chip">APIs</span>
+          <span class="chip">Power BI</span>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <h3 class="muted">Soft Skills</h3>
+        <div>
+          <span class="chip">Communication</span><span class="chip">Presentation</span>
+          <span class="chip">Adaptability</span><span class="chip">Collaboration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="education" class="section">
+    <h2 class="title">Education</h2>
+    <div class="panel">
+      <h3>MIT College of Railway Engineering and Research, Barshi</h3>
+      <p>B.Tech in Computer Science and Engineering (2021–2024) — <strong>CGPA: 8.45</strong></p>
+      <p class="muted">Areas: Statistics, ML, AI, Data Analysis, Algorithms, Databases.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="certifications" class="section">
+    <h2 class="title">Certifications</h2>
+    <div class="grid cols-2">
+      <div class="card">
+        <h3>Data Science & Analytics — Adhyayan Institute</h3>
+        <p><a href="" target="_blank" rel="noopener">View Certificate ↗</a></p>
+      </div>
+      <div class="card">
+        <h3>SQL (Basic) — HackerRank</h3>
+        <p><a href="https://www.hackerrank.com/certificates/iframe/3a10905fa233" target="_blank" rel="noopener">View Certificate ↗</a></p>
+      </div>
+      <div class="card">
+        <h3>Power BI — TNX Certification Program</h3>
+        <p><a href="https://drive.google.com/file/d/1GcRd60VWH7kAy7BUpRY1xR3pVYAprCGc/view?usp=sharing" target="_blank" rel="noopener">View Certificate ↗</a></p>
+      </div>
+      <div class="card">
+        <h3>Cloud Computing — Teachnook Internship Program</h3>
+        <p><a href="https://drive.google.com/file/d/1L-b2OH0jnMWOgmn_np-6kaD_OjNR7DIH/view?usp=sharing" target="_blank" rel="noopener">View Certificate ↗</a></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="contact" class="section">
+    <h2 class="title">Contact</h2>
+    <div class="panel">
+      <p>Open to roles in <strong>Data Science</strong>, <strong>ML/AI</strong>, and <strong>Analytics</strong>. Let's collaborate.</p>
+      <div class="nav">
+        <a class="btn primary" href="mailto:jayantmodak10@gmail.com">Email Me</a>
+        <a class="btn" href="https://linkedin.com/in/jayant-modak-30440b215" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/JayantM1" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <small class="muted">Prefer WhatsApp/Call? <strong>+91 7057367616</strong></small>
+    </div>
+  </section>
+
+</main>
+
+<footer class="container">
+  <div class="divider"></div>
+  <div class="row" style="align-items:center;justify-content:space-between">
+    <div>© <span id="year"></span> Jayant Sanjay Modak</div>
+    <nav class="nav">
+      <a class="chip" href="#summary">Summary</a>
+      <a class="chip" href="#projects">Projects</a>
+      <a class="chip" href="#skills">Skills</a>
+      <a class="chip" href="#education">Education</a>
+      <a class="chip" href="#certifications">Certifications</a>
+      <a class="chip" href="#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
